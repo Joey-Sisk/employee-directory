@@ -22,7 +22,7 @@
   },
   {
     "id": 4,
-    "name": "HaRRY",
+    "name": "Harry",
     "image": "https://s-media-cache-ak0.pinimg.com/originals/fe/32/49/fe32495d45283cd6860ae122f0aeaad9.png",
     "title": "Boy Genius",
     "location": "A Secret Laboratory"
@@ -55,6 +55,7 @@
     "title": "Ladies Man",
     "location": "Aron City"
   },
+  
   {
     "id": 9,
     "name": "Tom",
