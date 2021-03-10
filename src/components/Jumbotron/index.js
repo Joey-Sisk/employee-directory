@@ -1,11 +1,13 @@
 import React from "react";
 
 function Jumbotron() {
+
+  
   return (
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4">Employee Directory</h1>
-        <p class="lead">For viewing and sorting staff stats.</p>
+    <div className="jumbotron jumbotron-fluid">
+      <div className="container">
+        <h1 className="display-4">Employee Directory</h1>
+        <p className="lead">For viewing and sorting staff stats.</p>
       </div>
     </div>
   );
