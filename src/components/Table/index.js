@@ -67,7 +67,7 @@ const Table = () => {
   // console.log(employeeState.currentSort);
 
   return (
-    data > 0 && (
+    data.length > 0 && ( // why does it break here?
       <div>
         <input // this should probably be moved to its own component
           type="text"
@@ -95,9 +95,9 @@ const Table = () => {
             </tr>
           </thead>
           <tbody>
-            {[...data]
+            {[...data] // this breaks it too
               .sort(sortTypes[currentSort].fn)
-              .filter((data) => {
+              .filter((data) => { 
                 console.log(data);
                 if (employeeState.search == null) return data;
                 else if (
