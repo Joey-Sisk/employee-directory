@@ -54,15 +54,14 @@ const Table = () => {
     default: {
       class: "sort",
       fn: (a, b) => a,
-    }
+    },
   };
 
   console.log(employees);
 
   return employees.length > 0 ? (
     <div>
-      <SearchBar
-      searchSpace={searchSpace} />
+      <SearchBar searchSpace={searchSpace} />
 
       <table className="table" id="myTable">
         <thead>
@@ -96,7 +95,7 @@ const Table = () => {
               return (
                 <tr keys={data.email}>
                   {/* <th scope="row"></th> */}
-                  <td scope="row">{data.name.first}</td>
+                  <th scope="row">{data.name.first}</th>
                   <td>{data.name.last}</td>
                   <td>{`${data.location.city}, ${data.location.state}`}</td>
                   <td>{data.dob.age}</td>
