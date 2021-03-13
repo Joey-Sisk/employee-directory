@@ -3,13 +3,13 @@ import SearchBar from "../SearchBar";
 import API from "../../utils/API";
 
 const Table = () => {
-  // Simplified state variables. Just easy to manage and no need to do spread or destructure
+  // hook variables holds data for app
   const [employees, setEmployees] = useState([]);
   const [currentSort, setCurrentSort] = useState("default");
   const [search, setSearch] = useState(null);
 
   useEffect(() => {
-    //if (employees.length === 0) {
+    // pull in info from random user API
     API.getEmployees()
       .then((res) => {
         if (res.data.results.length === 0) {
@@ -22,11 +22,10 @@ const Table = () => {
         setEmployees(res.data.results);
       })
       .catch((err) => console.log(err));
-    //}
-  }, []); // The empty array forces this to load only  once. No need to have "if employees.length === 0"
+  }, []);
 
   const onSortChange = () => {
-    // used to render corrent FA symbol
+    // render correct FA symbol and use right sortTypes key
     let nextSort;
 
     if (currentSort === "down") nextSort = "up";
@@ -37,6 +36,7 @@ const Table = () => {
   };
 
   const searchSpace = (event) => {
+    // keeps track of input in searchbar
     let keyword = event.target.value;
     setSearch(keyword);
   };
@@ -59,14 +59,13 @@ const Table = () => {
 
   console.log(employees);
 
-  return employees.length > 0 ? (
+  return employees.length > 0 ? ( // ternary operator checks for valid input
     <div>
       <SearchBar searchSpace={searchSpace} />
 
       <table className="table table-striped" id="myTable">
         <thead>
           <tr>
-            {/* <th scope="col">#</th> */}
             <th scope="col">#</th>
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
@@ -80,14 +79,16 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {employees
+          {employees // sorts and then searches from employees hook
             .sort(sortTypes[currentSort].fn)
             .filter((data) => {
               if (search == null) return data;
               else if (
                 data.name.first.toLowerCase().includes(search.toLowerCase()) ||
                 data.name.last.toLowerCase().includes(search.toLowerCase()) ||
-                data.location.city.toLowerCase().includes(search.toLowerCase()) ||
+                data.location.city
+                  .toLowerCase()
+                  .includes(search.toLowerCase()) ||
                 data.location.state.toLowerCase().includes(search.toLowerCase())
               ) {
                 return data;
@@ -96,7 +97,6 @@ const Table = () => {
             .map((data) => {
               return (
                 <tr keys={data.email}>
-                  {/* <th scope="row"></th> */}
                   <th scope="row">
                     <img src={data.picture.thumbnail} alt="headshot"></img>
                   </th>
