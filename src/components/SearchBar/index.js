@@ -4,8 +4,9 @@ function SearchBar(props) {
   return (
     <input // this should probably be moved to its own component
       type="text"
-      placeholder="Enter item to be searched"
+      placeholder="Search Table"
       onChange={(e) => props.searchSpace(e)}
+      className="mb-4"
     />
   );
 }

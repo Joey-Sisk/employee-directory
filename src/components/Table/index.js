@@ -63,15 +63,16 @@ const Table = () => {
     <div>
       <SearchBar searchSpace={searchSpace} />
 
-      <table className="table" id="myTable">
+      <table className="table table-striped" id="myTable">
         <thead>
           <tr>
             {/* <th scope="col">#</th> */}
+            <th scope="col">#</th>
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
             <th scope="col">Location</th>
             <th scope="col">
-              Age
+              Age{" "}
               <button onClick={onSortChange}>
                 <i className={`fas fa-${sortTypes[currentSort].class}`} />
               </button>
@@ -95,7 +96,10 @@ const Table = () => {
               return (
                 <tr keys={data.email}>
                   {/* <th scope="row"></th> */}
-                  <th scope="row">{data.name.first}</th>
+                  <th scope="row">
+                    <img src={data.picture.thumbnail} alt="headshot"></img>
+                  </th>
+                  <td>{data.name.first}</td>
                   <td>{data.name.last}</td>
                   <td>{`${data.location.city}, ${data.location.state}`}</td>
                   <td>{data.dob.age}</td>
