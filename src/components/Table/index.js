@@ -87,7 +87,8 @@ const Table = () => {
               else if (
                 data.name.first.toLowerCase().includes(search.toLowerCase()) ||
                 data.name.last.toLowerCase().includes(search.toLowerCase()) ||
-                data.location.city.toLowerCase().includes(search.toLowerCase())
+                data.location.city.toLowerCase().includes(search.toLowerCase()) ||
+                data.location.state.toLowerCase().includes(search.toLowerCase())
               ) {
                 return data;
               }
@@ -114,7 +115,7 @@ const Table = () => {
 
 export default Table;
 
-// search function built with the help of Florin Pop
+// sort function built with the help of Florin Pop
 // https://www.florin-pop.com/blog/2019/07/sort-table-data-with-react/
 
 // search function built with the help of Bhavya Ambasta with Medium.com
