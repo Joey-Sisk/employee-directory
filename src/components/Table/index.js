@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import SearchBar from "../SearchBar";
+import SearchBar from "../SearchBar"; // connects to searchbar component
 import API from "../../utils/API";
 
 const Table = () => {
