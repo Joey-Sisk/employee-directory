@@ -43,5 +43,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://myusername.github.io/employee-directory"
+  "homepage": "https://myusername.github.io/employee-directory",
+  "devDependencies": {
+    "react-social-icons": "^4.1.0"
+  }
 }
