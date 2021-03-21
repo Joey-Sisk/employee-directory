@@ -3,7 +3,7 @@
 
 ## Description
 
-This React application is designed to allow a business to review information about their employee's and sort or search through that data. The styling was done primarily through Bootstrap and Bootswatch and the empoyee information comes from the [Random User API](https://randomuser.me/). Axios was used to incorporate the API into the code. The sorting method was adapted from [Florin Pops tutorial](https://www.florin-pop.com/blog/2019/07/sort-table-data-with-react/), and the search function was adapted from a [Medium article by Bhavya Ambasta](https://medium.com/crobyer/search-filter-with-react-js-88986c644ed5).
+This React application is designed to allow a business to review information about their employee's and sort or search through that data. The styling was done primarily through Bootstrap and Bootswatch and the employee information comes from the [Random User API](https://randomuser.me/). Axios was used to incorporate the API into the code. The sorting method was adapted from [Florin Pops tutorial](https://www.florin-pop.com/blog/2019/07/sort-table-data-with-react/), and the search function was adapted from a [Medium article by Bhavya Ambasta](https://medium.com/crobyer/search-filter-with-react-js-88986c644ed5).
 
 ## Table of Contents
 
