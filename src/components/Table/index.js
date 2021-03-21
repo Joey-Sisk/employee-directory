@@ -2,47 +2,42 @@ import React, { useState, useEffect } from "react";
 import API from "../../utils/API";
 
 const Table = () => {
-  const [employeeState, setEmployeeState] = useState({
-    currentSort: "default",
-    search: null,
-    employees: [],
-  });
-  // const [employees1, setEmployees1] = useState([]);
+
+  // Simplified state variables. Just easy to manage and no need to do spread or destructure
+  const [employees, setEmployees] = useState([]);
+  const [currentSort, setCurrentSort] = useState("default");
+  const [search, setSearch] = useState(null);
 
   useEffect(() => {
-    if (employeeState.employees.length === 0) {
-      API.getEmployees()
-        .then((res) => {
-          if (res.data.lendth === 0) {
-            throw new Error("No results found.");
-          }
-          if (res.data.status === "error") {
-            throw new Error(res.data.message);
-          }
-          // console.log(res.data.results);
-          setEmployeeState({ ...employeeState, employees: res.data.results });
-        })
-        .catch((err) => console.log(err));
-    }
-  });
-
-  console.log(employeeState.employees);
+    //if (employees.length === 0) {
+    API.getEmployees()
+      .then((res) => {
+        if (res.data.results.length === 0) {
+          throw new Error("No results found.");
+        }
+        if (res.data.status === "error") {
+          throw new Error(res.data.message);
+        }
+        
+        setEmployees(res.data.results);
+      }).catch((err) => console.log(err));
+    //}
+  }, []); // The empty array forces this to load only  once. No need to have "if employees.length === 0"
 
   const onSortChange = () => {
     // used to render corrent FA symbol
-    const { currentSort } = setEmployeeState({ ...employeeState });
     let nextSort;
 
     if (currentSort === "down") nextSort = "up";
     else if (currentSort === "up") nextSort = "default";
     else if (currentSort === "default") nextSort = "down";
 
-    setEmployeeState({ ...employeeState, currentSort: nextSort });
+    setCurrentSort(nextSort);
   };
 
   const searchSpace = (event) => {
     let keyword = event.target.value;
-    setEmployeeState({ ...employeeState, search: keyword });
+    setSearch(keyword);
   };
 
   const sortTypes = {
@@ -61,13 +56,8 @@ const Table = () => {
     },
   };
 
-  const { data } = employeeState.employees; // brings in employees.json
-  const { currentSort } = employeeState.currentSort;
-
-  // console.log(employeeState.currentSort);
-
   return (
-    data.length > 0 && ( // why does it break here?
+    employees.length > 0 ?
       <div>
         <input // this should probably be moved to its own component
           type="text"
@@ -84,40 +74,38 @@ const Table = () => {
               <th scope="col">Location</th>
               <th scope="col">
                 Age
-                <button onClick={onSortChange}>
+            <button onClick={onSortChange}>
                   <i
-                    className={`fas fa-${
-                      sortTypes[employeeState.currentSort].class
-                    }`}
+                    className={`fas fa-${sortTypes[currentSort].class
+                      }`}
                   />
                 </button>
               </th>
             </tr>
           </thead>
           <tbody>
-            {[...data] // this breaks it too
+            {employees
               .sort(sortTypes[currentSort].fn)
-              .filter((data) => { 
-                console.log(data);
-                if (employeeState.search == null) return data;
+              .filter((data) => {
+                if (search == null) return data;
                 else if (
                   data.name.first
                     .toLowerCase()
-                    .includes(employeeState.search.toLowerCase()) ||
+                    .includes(search.toLowerCase()) ||
                   data.name.last
                     .toLowerCase()
-                    .includes(employeeState.search.toLowerCase()) ||
+                    .includes(search.toLowerCase()) ||
                   data.location.city
                     .toLowerCase()
-                    .includes(employeeState.search.toLowerCase())
+                    .includes(search.toLowerCase())
                 ) {
                   return data;
                 }
               })
               .map((data) => {
                 return (
-                  <tr>
-                    <th scope="row">{data.id}</th>
+                  <tr keys={data.email}>
+                    <th scope="row"></th>
                     <td>{data.name.first}</td>
                     <td>{data.last}</td>
                     <td>{data.location.city}</td>
@@ -127,8 +115,7 @@ const Table = () => {
               })}
           </tbody>
         </table>
-      </div>
-    )
+      </div> : null
   );
 };
 
